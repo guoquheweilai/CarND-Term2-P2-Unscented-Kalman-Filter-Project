@@ -54,6 +54,56 @@ UKF::UKF() {
 
   Hint: one or more values initialized above might be wildly off...
   */
+
+  // Set state dimension
+  int n_x_ = 5;
+
+  // Define spreading parameter
+  double lambda_ = 3 - n_x_;
+
+  //set augmented dimension
+  int n_aug_ = 7;
+
+  // Create state vector
+  VectorXd x_ = VectorXd(n_x_);
+  x_ << 0,
+	    0,
+	    0,
+	    0,
+	    0;
+
+  // Create covariance matrix
+  MatrixXd P_ = MatrixXd(n_x_, n_x_);
+  P_ << 1, 0, 0, 0, 0,
+	    0, 1, 0, 0, 0,
+	    0, 0, 1, 0, 0,
+	    0, 0, 0, 1, 0,
+	    0, 0, 0, 0, 1;
+
+  // Create vector for weights
+  VectorXd weights_ = VectorXd(2 * n_aug_ + 1);
+  // Set weights
+  // Initialize the first element
+  weights_(0) = lambda_ / (lambda_ + n_aug_);
+  // Initialize the rest of elements
+  int i = 0;
+  for (i = 1; i < 2 * n_aug_ + 1; i++) {
+	  weights_(i) = 0.5 / (n_aug_ + lambda_);
+  }
+
+  //// Set measurement dimension, radar can measure r, phi, and r_dot
+  //int n_z = 3;
+
+  // Create radar covariance matrix
+  MatrixXd R_radar_ = MatrixXd(3, 3);
+  R_radar_ << std_radr_ * std_radr_,                         0,                       0,
+	                              0, std_radphi_ * std_radphi_,                       0,
+	                              0,                         0, std_radrd_ * std_radrd_;
+
+  // Create lidar covariance matrix
+  MatrixXd R_lidar_ = MatrixXd(2, 2);
+  R_lidar_ << std_laspx_ * std_laspx_,                       0,
+	                                0, std_laspy_ * std_laspy_;
 }
 
 UKF::~UKF() {}
