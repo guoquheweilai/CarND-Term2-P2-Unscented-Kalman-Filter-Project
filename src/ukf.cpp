@@ -119,6 +119,11 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
   Complete this function! Make sure you switch between lidar and radar
   measurements.
   */
+
+	// TODO : Check if data is initialized ?
+	// TODO : Call predition step with calculated time interval
+	// TODO : Call update step with given senser type
+
 }
 
 /**
@@ -133,6 +138,13 @@ void UKF::Prediction(double delta_t) {
   Complete this function! Estimate the object's location. Modify the state
   vector, x_. Predict sigma points, the state, and the state covariance matrix.
   */
+
+  // TODO: Generate sigma points
+  // TODO : Augment Sigma Points
+  // TODO : Predict sigma points
+  // TODO : Calculate mean
+  // TODO : Calculate variance
+  // TODO : Normalize angles
 }
 
 /**
@@ -148,6 +160,19 @@ void UKF::UpdateLidar(MeasurementPackage meas_package) {
 
   You'll also need to calculate the lidar NIS.
   */
+
+  // TODO: Extract data from measurement
+  // TODO : Generate measurement sigma points
+  // TODO : Update predicted measurement mean
+  // TODO : Update predicted measurement covariance
+  // TODO : Add noise
+  // TODO : Create cross covariance matrix
+  // TODO : Calculate Kalman gain Kalman
+  // TODO : Calculate residual error
+  // TODO : Normalize angles
+  // TODO : Update state mean vector
+  // TODO : Update state covariance matrix
+  // TODO : Update NIS Radar
 }
 
 /**
@@ -163,4 +188,18 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
 
   You'll also need to calculate the radar NIS.
   */
+
+  // TODO: Extract data from measurement
+  // TODO : Generate measurement sigma points
+  // TODO : Update predicted measurement mean
+  // TODO : Update predicted measurement covariance
+  // TODO : Add noise
+  // TODO : Create cross covariance matrix
+  // TODO : Calculate Kalman gain Kalman
+  // TODO : Calculate residual error
+  // TODO : Normalize angles
+  // TODO : Update state mean vector
+  // TODO : Update state covariance matrix
+  // TODO : Update NIS Lidar
+
 }
