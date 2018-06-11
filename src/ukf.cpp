@@ -120,10 +120,75 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
   measurements.
   */
 
+   /*****************************************************************************
+   *  Initialization
+   ****************************************************************************/
 	// TODO : Check if data is initialized ?
-	// TODO : Call predition step with calculated time interval
-	// TODO : Call update step with given senser type
+  if (!is_initialized_){
+    /**
+    TODO:
+      * Initialize the state ekf_.x_ with the first measurement.
+      * Create the covariance matrix.
+      * Remember: you'll need to convert radar from polar to cartesian coordinates.
+    */
+	  if (meas_package.sensor_type == MeasurementPackage::RADAR) {
+	     /**
+             Convert radar from polar to cartesian coordinates and initialize state.
+             */
+	     float rho = meas_package.raw_measurements_[0]; // range
+	     float phi = meas_package.raw_measurements_[1]; // bearing
+	     float rho_dot = meas_package.raw_measurements_[2]; // velocity of rho
 
+	     float px = rho * cos(phi); // position x
+	     float py = rho * sin(phi); // position y
+	     float vx = rho_dot * cos(phi); // velocity x
+	     float vy = rho_dot * sin(phi); // velocity y
+	     float v = sqrt(vx * vx + vy * vy); // velocity
+		  
+	     x_ << px, py, v, 0, 0;
+		  
+	  }
+	  else if (meas_package.sensor_type == MeasurementPackage::LASER){
+	    /**
+            Initialize state.
+            */
+
+	    float px = meas_package.raw_measurements_[0]; // position x
+	    float py = meas_package.raw_measurements_[1]; // position y
+
+	    x_ << px, py, 0, 0, 0;
+	  }
+	  
+	  // Initial measurement timestamp
+	  time_us_ = meas_package.timestamp_;
+	  
+          // done initializing, no need to predict or update
+          is_initialized_ = true;
+          return;
+  }
+   /*****************************************************************************
+   *  Prediction
+   ****************************************************************************/
+	// TODO : Call predition step with calculated time interval
+	
+	// Calculate time interval dt
+	float dt = (meas_package.timestamp_ - time_us_) / 1000000.0;
+	// Update measurement timestamp  
+	time_us_ = meas_package.timestamp_;
+	// Call prediction
+	Prediction(dt);
+	
+   /*****************************************************************************
+   *  Update
+   ****************************************************************************/
+	// TODO : Call update step with given senser type
+	
+	if (meas_package.sensor_type == MeasurementPackage::RADAR) {
+		UpdateRadar(meas_package);	
+	}
+	else if (meas_package.sensor_type == MeasurementPackage::LASER) {
+		UpdateLidar(meas_package);
+	}
 }
 
 /**
