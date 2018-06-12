@@ -181,7 +181,8 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
           is_initialized_ = true;
 		  cout << "Initialization completed." << endl;
 		  cout << "x_ is " << x_ << endl;
-
+		  cout << "n_aug_ is " << n_aug_ << endl;
+		  cout << "n_x_ is " << n_x_ << endl;
 
           return;
   }
