@@ -67,22 +67,6 @@ UKF::UKF() {
   // Define spreading parameter
   double lambda_ = 3 - n_aug_;
 
-  // Create state vector
-  VectorXd x_ = VectorXd(n_x_);
-  x_ << 0,
-	    0,
-	    0,
-	    0,
-	    0;
-
-  // Create covariance matrix
-  MatrixXd P_ = MatrixXd(n_x_, n_x_);
-  P_ << 1, 0, 0, 0, 0,
-	    0, 1, 0, 0, 0,
-	    0, 0, 1, 0, 0,
-	    0, 0, 0, 1, 0,
-	    0, 0, 0, 0, 1;
-
   // Create predicted sigma points matrix
   Xsig_pred_ = MatrixXd(n_x_, 2 * n_aug_ + 1);
 
@@ -146,6 +130,21 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
       * Create the covariance matrix.
       * Remember: you'll need to convert radar from polar to cartesian coordinates.
     */
+
+	  // Initialize state
+	  x_ << 0,
+		  0,
+		  0,
+		  0,
+		  0;
+
+	  // Initialize covariance matrix
+	  P_ << 1, 0, 0, 0, 0,
+		  0, 1, 0, 0, 0,
+		  0, 0, 1, 0, 0,
+		  0, 0, 0, 1, 0,
+		  0, 0, 0, 0, 1;
+
 	  if (meas_package.sensor_type_ == MeasurementPackage::RADAR) {
 	     /**
              Convert radar from polar to cartesian coordinates and initialize state.
