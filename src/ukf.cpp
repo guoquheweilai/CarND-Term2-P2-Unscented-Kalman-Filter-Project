@@ -132,12 +132,12 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
     */
 
 	  cout << "Initialization started." << endl;
-	  // Initialize state
-	  x_ << 0,
-		  0,
-		  0,
-		  0,
-		  0;
+	  //// Initialize state
+	  //x_ << 0.0,
+		 // 0.0,
+		 // 0.0,
+		 // 0.0,
+		 // 0.0;
 
 	  // Initialize covariance matrix
 	  P_ << 1, 0, 0, 0, 0,
