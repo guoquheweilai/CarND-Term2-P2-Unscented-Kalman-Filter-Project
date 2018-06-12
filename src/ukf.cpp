@@ -12,6 +12,8 @@ using std::vector;
  * This is scaffolding, do not modify
  */
 UKF::UKF() {
+  cout << "UKF() started." << endl;
+
   // if this is false, laser measurements will be ignored (except during init)
   use_laser_ = true;
 
@@ -103,6 +105,10 @@ UKF::UKF() {
 
   ///* the current NIS for laser
   NIS_laser_ = 0.0;
+
+  cout << "n_aug_ is " << n_aug_ << endl;
+  cout << "n_x_ is " << n_x_ << endl;
+  cout << "UKF() completed." << endl;
 }
 
 UKF::~UKF() {}
