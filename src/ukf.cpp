@@ -131,6 +131,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
       * Remember: you'll need to convert radar from polar to cartesian coordinates.
     */
 
+	  cout << "Initialization started." << endl;
 	  // Initialize state
 	  x_ << 0,
 		  0,
@@ -178,6 +179,8 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	  
           // done initializing, no need to predict or update
           is_initialized_ = true;
+		  cout << "Initialization completed." << endl;
+
           return;
   }
    /*****************************************************************************
@@ -190,7 +193,9 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	// Update measurement timestamp  
 	time_us_ = meas_package.timestamp_;
 	// Call prediction
+	cout << "Prediction started." << endl;
 	Prediction(dt);
+	cout << "Prediction completed." << endl;
 	
    /*****************************************************************************
    *  Update
@@ -198,10 +203,14 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	// TODO : Call update step with given senser type
 	
 	if (meas_package.sensor_type_ == MeasurementPackage::RADAR) {
-		UpdateRadar(meas_package);	
+		cout << "UpdateRadar started." << endl;
+		UpdateRadar(meas_package);
+		cout << "UpdateRadar completed." << endl;
 	}
 	else if (meas_package.sensor_type_ == MeasurementPackage::LASER) {
+		cout << "UpdateLidar started." << endl;
 		UpdateLidar(meas_package);
+		cout << "UpdateLidar completed." << endl;
 	}
 }
 
@@ -246,6 +255,7 @@ void UKF::Prediction(double delta_t) {
   *  Augment Sigma Points
   ****************************************************************************/
   // TODO : Augment Sigma Points
+  cout << "Augment sigma points started." << endl;
 
   // Create augmented mean vector
   VectorXd x_aug = VectorXd(n_aug_);
@@ -288,6 +298,7 @@ void UKF::Prediction(double delta_t) {
   ****************************************************************************/
 
   // TODO : Predict sigma points
+  cout << "Predict sigma points started." << endl;
 
   //int i = 0;
   for (i = 0; i < 2 * n_aug_ + 1; i++) {
@@ -340,6 +351,7 @@ void UKF::Prediction(double delta_t) {
   // TODO : Calculate mean
   // TODO : Calculate variance
   // TODO : Normalize angles
+  cout << "Predict state mean and variance started." << endl;
 
   // Predict state mean
   for (i = 0; i < 2 * n_aug_ + 1; i++) {
