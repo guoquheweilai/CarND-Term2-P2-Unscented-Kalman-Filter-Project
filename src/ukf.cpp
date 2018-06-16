@@ -375,6 +375,8 @@ void UKF::Prediction(double delta_t) {
 	  x_ += weights_(i) * Xsig_pred_.col(i);
   }
 
+  cout << "Predict state mean and variance midpoint." << endl;
+
   // Predict state covariance matrix
   for (i = 0; i < 2 * n_aug_ + 1; i++) {
 	  VectorXd x_diff = Xsig_pred_.col(i) - x_;
@@ -389,6 +391,8 @@ void UKF::Prediction(double delta_t) {
 
 	  P_ += weights_(i) * x_diff * x_diff.transpose();
   }
+
+  cout << "Predict state mean and variance completed." << endl;
 
 }
 
