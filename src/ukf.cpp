@@ -61,13 +61,13 @@ UKF::UKF() {
   is_initialized_ = false;
 
   // Set state dimension
-  int n_x_ = 5;
+  n_x_ = 5;
 
   // Set augmented dimension
-  int n_aug_ = 7;
+  n_aug_ = 7;
 
   // Define spreading parameter
-  double lambda_ = 3 - n_aug_;
+  lambda_ = 3 - n_aug_;
 
   // Create predicted sigma points matrix
   Xsig_pred_ = MatrixXd(n_x_, 2 * n_aug_ + 1);
@@ -90,13 +90,13 @@ UKF::UKF() {
   //int n_z = 3;
 
   // Create radar covariance matrix
-  MatrixXd R_radar_ = MatrixXd(3, 3);
+  R_radar_ = MatrixXd(3, 3);
   R_radar_ << std_radr_ * std_radr_,                         0,                       0,
 	                              0, std_radphi_ * std_radphi_,                       0,
 	                              0,                         0, std_radrd_ * std_radrd_;
 
   // Create lidar covariance matrix
-  MatrixXd R_lidar_ = MatrixXd(2, 2);
+  R_lidar_ = MatrixXd(2, 2);
   R_lidar_ << std_laspx_ * std_laspx_,                       0,
 	                                0, std_laspy_ * std_laspy_;
 
