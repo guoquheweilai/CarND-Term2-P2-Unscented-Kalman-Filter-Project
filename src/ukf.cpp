@@ -76,7 +76,7 @@ UKF::UKF() {
   time_us_ = 0.0;
 
   // Create vector for weights
-  VectorXd weights_ = VectorXd(2 * n_aug_ + 1);
+  weights_ = VectorXd(2 * n_aug_ + 1);
   // Set weights
   // Initialize the first element
   weights_(0) = lambda_ / (lambda_ + n_aug_);
