@@ -267,8 +267,8 @@ void UKF::Prediction(double delta_t) {
   cout << "Augment sigma points started." << endl;
 
   // Create augmented mean vector
-  cout << "n_aug_ is " << n_aug_ << endl;
-  cout << "n_x_ is " << n_x_ << endl;
+  //cout << "n_aug_ is " << n_aug_ << endl;
+  //cout << "n_x_ is " << n_x_ << endl;
   VectorXd x_aug = VectorXd(n_aug_);
 
   // Create augmented state covariance
@@ -286,8 +286,8 @@ void UKF::Prediction(double delta_t) {
   //cout << "Filled with 0.0" << x_aug << endl;
   x_aug.head(n_x_) = x_;
   //cout << "Filled with x_" << x_aug << endl;
-  //x_aug(5) = 0;
-  //x_aug(6) = 0;
+  x_aug(5) = 0;
+  x_aug(6) = 0;
 
   // Create augmented covariance matrix
   cout << "P_aug started." << endl;
