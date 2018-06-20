@@ -27,10 +27,10 @@ UKF::UKF() {
   P_ = MatrixXd(5, 5);
 
   // Process noise standard deviation longitudinal acceleration in m/s^2
-  std_a_ = 30;
+  std_a_ = 3;
 
   // Process noise standard deviation yaw acceleration in rad/s^2
-  std_yawdd_ = 30;
+  std_yawdd_ = 0.5;
   
   //DO NOT MODIFY measurement noise values below these are provided by the sensor manufacturer.
   // Laser measurement noise standard deviation position1 in m
@@ -106,8 +106,8 @@ UKF::UKF() {
   ///* the current NIS for laser
   NIS_laser_ = 0.0;
 
-  cout << "n_aug_ is " << n_aug_ << endl;
-  cout << "n_x_ is " << n_x_ << endl;
+  //cout << "n_aug_ is " << n_aug_ << endl;
+  //cout << "n_x_ is " << n_x_ << endl;
   cout << "UKF() completed." << endl;
 }
 
@@ -186,9 +186,9 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
           // done initializing, no need to predict or update
           is_initialized_ = true;
 		  cout << "Initialization completed." << endl;
-		  cout << "x_ is " << x_ << endl;
-		  cout << "n_aug_ is " << n_aug_ << endl;
-		  cout << "n_x_ is " << n_x_ << endl;
+		  //cout << "x_ is " << x_ << endl;
+		  //cout << "n_aug_ is " << n_aug_ << endl;
+		  //cout << "n_x_ is " << n_x_ << endl;
 
           return;
   }
@@ -283,9 +283,9 @@ void UKF::Prediction(double delta_t) {
   // Create augmented mean state
   cout << "x_aug started." << endl;
   x_aug.fill(0.0);
-  cout << "Filled with 0.0" << x_aug << endl;
+  //cout << "Filled with 0.0" << x_aug << endl;
   x_aug.head(n_x_) = x_;
-  cout << "Filled with x_" << x_aug << endl;
+  //cout << "Filled with x_" << x_aug << endl;
   //x_aug(5) = 0;
   //x_aug(6) = 0;
 
