@@ -431,9 +431,9 @@ void UKF::UpdateLidar(MeasurementPackage meas_package) {
   //set measurement dimension, lidar can measure position x and position y
   int n_z = 2;
 
-  ////create matrix for sigma points in measurement space
-  //MatrixXd Zsig = MatrixXd(n_z, 2 * n_aug_ + 1);
-  //Zsig = Xsig_pred_.block(0, 0, n_z, 2 * n_aug_ + 1);
+  //create matrix for sigma points in measurement space
+  MatrixXd Zsig = MatrixXd(n_z, 2 * n_aug_ + 1);
+  Zsig = Xsig_pred_.block(0, 0, n_z, 2 * n_aug_ + 1);
 
   //mean predicted measurement
   VectorXd z_pred = VectorXd(n_z);
@@ -441,23 +441,23 @@ void UKF::UpdateLidar(MeasurementPackage meas_package) {
   //measurement covariance matrix S
   MatrixXd S = MatrixXd(n_z, n_z);
 
- // //transform sigma points into measurement space
-	//int i = 0;
-	//for (i = 0; i < 2 * n_aug_ + 1; i++) {
-	//	// Read values from current state vector
-	//	double p_x = Xsig_pred_(0, i);
-	//	double p_y = Xsig_pred_(1, i);
-	//	double v   = Xsig_pred_(2, i);
-	//	double yaw = Xsig_pred_(3, i);
+  //transform sigma points into measurement space
+	int i = 0;
+	for (i = 0; i < 2 * n_aug_ + 1; i++) {
+		// Read values from current state vector
+		double p_x = Xsig_pred_(0, i);
+		double p_y = Xsig_pred_(1, i);
+		double v   = Xsig_pred_(2, i);
+		double yaw = Xsig_pred_(3, i);
 
-	//	double v1 = cos(yaw) * v;
-	//	double v2 = sin(yaw) * v;
+		double v1 = cos(yaw) * v;
+		double v2 = sin(yaw) * v;
 
-	//	// Update measurement model
-	//	Zsig(0, i) = sqrt(p_x * p_x + p_y * p_y);                         // r
-	//	Zsig(1, i) = atan2(p_y, p_x);                                     // phi
-	//	Zsig(2, i) = (p_x * v1 + p_y * v2) / sqrt(p_x * p_x + p_y * p_y); // r_dot
-	//}
+		// Update measurement model
+		Zsig(0, i) = sqrt(p_x * p_x + p_y * p_y);                         // r
+		Zsig(1, i) = atan2(p_y, p_x);                                     // phi
+		Zsig(2, i) = (p_x * v1 + p_y * v2) / sqrt(p_x * p_x + p_y * p_y); // r_dot
+	}
 
 	//calculate mean predicted measurement
 	z_pred.fill(0.0);
