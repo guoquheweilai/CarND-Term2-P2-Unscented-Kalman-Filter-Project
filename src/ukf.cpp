@@ -472,14 +472,14 @@ void UKF::UpdateLidar(MeasurementPackage meas_package) {
 		// Calculate the residual
 		VectorXd z_diff = Zsig.col(i) - z_pred;
 
-		// Normalize angle
-		while (z_diff(1) > M_PI) {
-			z_diff(1) -= 2.0 * M_PI;
-		}
+		//// Normalize angle
+		//while (z_diff(1) > M_PI) {
+		//	z_diff(1) -= 2.0 * M_PI;
+		//}
 
-		while (z_diff(1) < -M_PI) {
-			z_diff(1) += 2.0 * M_PI;
-		}
+		//while (z_diff(1) < -M_PI) {
+		//	z_diff(1) += 2.0 * M_PI;
+		//}
 
 		S += weights_(i) * z_diff * z_diff.transpose();
 	}
@@ -505,26 +505,26 @@ void UKF::UpdateLidar(MeasurementPackage meas_package) {
 		// Calculate the residual on z
 		VectorXd z_diff = Zsig.col(i) - z_pred;
 
-		// Normalize angle
-		while (z_diff(1) > M_PI) {
-			z_diff(1) -= 2.0 * M_PI;
-		}
+		//// Normalize angle
+		//while (z_diff(1) > M_PI) {
+		//	z_diff(1) -= 2.0 * M_PI;
+		//}
 
-		while (z_diff(1) < -M_PI) {
-			z_diff(1) += 2.0 * M_PI;
-		}
+		//while (z_diff(1) < -M_PI) {
+		//	z_diff(1) += 2.0 * M_PI;
+		//}
 
 		// Calculate the difference on state
 		VectorXd x_diff = Xsig_pred_.col(i) - x_;
 
-		// Normalize angle
-		while (x_diff(3) > M_PI) {
-			x_diff(3) -= 2.0 * M_PI;
-		}
+		//// Normalize angle
+		//while (x_diff(3) > M_PI) {
+		//	x_diff(3) -= 2.0 * M_PI;
+		//}
 
-		while (x_diff(3) < -M_PI) {
-			x_diff(3) += 2.0 * M_PI;
-		}
+		//while (x_diff(3) < -M_PI) {
+		//	x_diff(3) += 2.0 * M_PI;
+		//}
 
 		Tc += weights_(i) * x_diff * z_diff.transpose();
 	}
@@ -536,14 +536,14 @@ void UKF::UpdateLidar(MeasurementPackage meas_package) {
 	// Calculate the residual on z
 	VectorXd z_diff = z - z_pred;
 
-	// Normalize angle
-	while (z_diff(1) > M_PI) {
-		z_diff(1) -= 2.0 * M_PI;
-	}
+	//// Normalize angle
+	//while (z_diff(1) > M_PI) {
+	//	z_diff(1) -= 2.0 * M_PI;
+	//}
 
-	while (z_diff(1) < -M_PI) {
-		z_diff(1) += 2.0 * M_PI;
-	}
+	//while (z_diff(1) < -M_PI) {
+	//	z_diff(1) += 2.0 * M_PI;
+	//}
 
 	// Update state mean and covariance matrix
 	x_ += K * z_diff;
