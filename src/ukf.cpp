@@ -461,7 +461,7 @@ void UKF::UpdateLidar(MeasurementPackage meas_package) {
 
 	//calculate mean predicted measurement
 	z_pred.fill(0.0);
-	int i = 0;
+	//int i = 0;
 	for (i = 0; i < 2 * n_aug_ + 1; i++) {
 		z_pred += weights_(i) * Zsig.col(i);
 	}
