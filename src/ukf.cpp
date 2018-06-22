@@ -156,15 +156,15 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	     /**
              Convert radar from polar to cartesian coordinates and initialize state.
              */
-	     float rho = meas_package.raw_measurements_[0]; // range
-	     float phi = meas_package.raw_measurements_[1]; // bearing
-	     float rho_dot = meas_package.raw_measurements_[2]; // velocity of rho
+	     double rho = meas_package.raw_measurements_[0]; // range
+		 double phi = meas_package.raw_measurements_[1]; // bearing
+		 double rho_dot = meas_package.raw_measurements_[2]; // velocity of rho
 
-	     float px = rho * cos(phi); // position x
-	     float py = rho * sin(phi); // position y
-	     float vx = rho_dot * cos(phi); // velocity x
-	     float vy = rho_dot * sin(phi); // velocity y
-	     float v = sqrt(vx * vx + vy * vy); // velocity
+		 double px = rho * cos(phi); // position x
+		 double py = rho * sin(phi); // position y
+		 double vx = rho_dot * cos(phi); // velocity x
+		 double vy = rho_dot * sin(phi); // velocity y
+		 double v = sqrt(vx * vx + vy * vy); // velocity
 		  
 	     x_ << px, py, v, 0, 0;
 		  
@@ -174,8 +174,8 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
             Initialize state.
             */
 
-	    float px = meas_package.raw_measurements_[0]; // position x
-	    float py = meas_package.raw_measurements_[1]; // position y
+		double px = meas_package.raw_measurements_[0]; // position x
+		double py = meas_package.raw_measurements_[1]; // position y
 
 	    x_ << px, py, 0, 0, 0;
 	  }
@@ -304,7 +304,7 @@ void UKF::Prediction(double delta_t) {
   Xsig_aug.col(0) = x_aug;
 
   int i = 0;
-  float sig_sqrt = sqrt(lambda_ + n_aug_);
+  double sig_sqrt = sqrt(lambda_ + n_aug_);
   for (i = 0; i < n_aug_; i++) {
 	  Xsig_aug.col(i + 1)          = x_aug + L.col(i) * sig_sqrt;
 	  Xsig_aug.col(i + 1 + n_aug_) = x_aug - L.col(i) * sig_sqrt;
@@ -431,9 +431,9 @@ void UKF::UpdateLidar(MeasurementPackage meas_package) {
   //set measurement dimension, lidar can measure position x and position y
   int n_z = 2;
 
-  //create matrix for sigma points in measurement space
-  MatrixXd Zsig = MatrixXd(n_z, 2 * n_aug_ + 1);
-  Zsig = Xsig_pred_.block(0, 0, n_z, 2 * n_aug_ + 1);
+  ////create matrix for sigma points in measurement space
+  //MatrixXd Zsig = MatrixXd(n_z, 2 * n_aug_ + 1);
+  //Zsig = Xsig_pred_.block(0, 0, n_z, 2 * n_aug_ + 1);
 
   //mean predicted measurement
   VectorXd z_pred = VectorXd(n_z);
