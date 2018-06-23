@@ -198,7 +198,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	// TODO : Call predition step with calculated time interval
 	
 	// Calculate time interval dt
-	float dt = (meas_package.timestamp_ - time_us_) / 1000000.0;
+	double dt = (meas_package.timestamp_ - time_us_) / 1000000.0;
 	// Update measurement timestamp  
 	time_us_ = meas_package.timestamp_;
 	// Call prediction
