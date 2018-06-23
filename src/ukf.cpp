@@ -12,7 +12,7 @@ using std::vector;
  * This is scaffolding, do not modify
  */
 UKF::UKF() {
-  cout << "UKF() started." << endl;
+  //cout << "UKF() started." << endl;
 
   // if this is false, laser measurements will be ignored (except during init)
   use_laser_ = true;
@@ -108,7 +108,7 @@ UKF::UKF() {
 
   //cout << "n_aug_ is " << n_aug_ << endl;
   //cout << "n_x_ is " << n_x_ << endl;
-  cout << "UKF() completed." << endl;
+  //cout << "UKF() completed." << endl;
 }
 
 UKF::~UKF() {}
@@ -137,7 +137,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
       * Remember: you'll need to convert radar from polar to cartesian coordinates.
     */
 
-	  cout << "Initialization started." << endl;
+	  //cout << "Initialization started." << endl;
 	  //// Initialize state
 	  //x_ << 0.0,
 		 // 0.0,
@@ -185,7 +185,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	  
           // done initializing, no need to predict or update
           is_initialized_ = true;
-		  cout << "Initialization completed." << endl;
+		  //cout << "Initialization completed." << endl;
 		  //cout << "x_ is " << x_ << endl;
 		  //cout << "n_aug_ is " << n_aug_ << endl;
 		  //cout << "n_x_ is " << n_x_ << endl;
@@ -202,9 +202,9 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	// Update measurement timestamp  
 	time_us_ = meas_package.timestamp_;
 	// Call prediction
-	cout << "Prediction started." << endl;
+	//cout << "Prediction started." << endl;
 	Prediction(dt);
-	cout << "Prediction completed." << endl;
+	//cout << "Prediction completed." << endl;
 	
    /*****************************************************************************
    *  Update
@@ -212,14 +212,14 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 	// TODO : Call update step with given senser type
 	
 	if (meas_package.sensor_type_ == MeasurementPackage::RADAR && use_radar_) {
-		cout << "UpdateRadar started." << endl;
+		//cout << "UpdateRadar started." << endl;
 		UpdateRadar(meas_package);
-		cout << "UpdateRadar completed." << endl;
+		//cout << "UpdateRadar completed." << endl;
 	}
 	else if (meas_package.sensor_type_ == MeasurementPackage::LASER && use_laser_) {
-		cout << "UpdateLidar started." << endl;
+		//cout << "UpdateLidar started." << endl;
 		UpdateLidar(meas_package);
-		cout << "UpdateLidar completed." << endl;
+		//cout << "UpdateLidar completed." << endl;
 	}
 }
 
@@ -264,7 +264,7 @@ void UKF::Prediction(double delta_t) {
   *  Augment Sigma Points
   ****************************************************************************/
   // TODO : Augment Sigma Points
-  cout << "Augment sigma points started." << endl;
+  //cout << "Augment sigma points started." << endl;
 
   // Create augmented mean vector
   //cout << "n_aug_ is " << n_aug_ << endl;
@@ -281,7 +281,7 @@ void UKF::Prediction(double delta_t) {
   //lambda_ = 3 - n_aug_;
 
   // Create augmented mean state
-  cout << "x_aug started." << endl;
+  //cout << "x_aug started." << endl;
   x_aug.fill(0.0);
   //cout << "Filled with 0.0" << x_aug << endl;
   x_aug.head(n_x_) = x_;
@@ -290,7 +290,7 @@ void UKF::Prediction(double delta_t) {
   x_aug(6) = 0;
 
   // Create augmented covariance matrix
-  cout << "P_aug started." << endl;
+  //cout << "P_aug started." << endl;
   P_aug.fill(0.0);
   P_aug.topLeftCorner(n_x_, n_x_) = P_;
   P_aug(5, 5) = std_a_ * std_a_;
@@ -300,7 +300,7 @@ void UKF::Prediction(double delta_t) {
   MatrixXd L = P_aug.llt().matrixL();
 
   //create augmented sigma points
-  cout << "Xsig_aug started." << endl;
+  //cout << "Xsig_aug started." << endl;
   Xsig_aug.col(0) = x_aug;
 
   int i = 0;
@@ -315,7 +315,7 @@ void UKF::Prediction(double delta_t) {
   ****************************************************************************/
 
   // TODO : Predict sigma points
-  cout << "Predict sigma points started." << endl;
+  //cout << "Predict sigma points started." << endl;
 
   //int i = 0;
   for (i = 0; i < 2 * n_aug_ + 1; i++) {
@@ -368,7 +368,7 @@ void UKF::Prediction(double delta_t) {
   // TODO : Calculate mean
   // TODO : Calculate variance
   // TODO : Normalize angles
-  cout << "Predict state mean and variance started." << endl;
+  //cout << "Predict state mean and variance started." << endl;
 
   // Predict state mean
   //for (i = 0; i < 2 * n_aug_ + 1; i++) {
@@ -376,7 +376,7 @@ void UKF::Prediction(double delta_t) {
   //}
   x_ = Xsig_pred_ * weights_;
 
-  cout << "Predict state mean and variance midpoint." << endl;
+  //cout << "Predict state mean and variance midpoint." << endl;
 
   // Predict state covariance matrix
   P_.fill(0.0);
@@ -394,7 +394,7 @@ void UKF::Prediction(double delta_t) {
 	  P_ += weights_(i) * x_diff * x_diff.transpose();
   }
 
-  cout << "Predict state mean and variance completed." << endl;
+  //cout << "Predict state mean and variance completed." << endl;
 
 }
 
