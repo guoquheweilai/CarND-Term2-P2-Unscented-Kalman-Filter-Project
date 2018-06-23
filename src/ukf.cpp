@@ -371,9 +371,10 @@ void UKF::Prediction(double delta_t) {
   cout << "Predict state mean and variance started." << endl;
 
   // Predict state mean
-  for (i = 0; i < 2 * n_aug_ + 1; i++) {
-	  x_ += weights_(i) * Xsig_pred_.col(i);
-  }
+  //for (i = 0; i < 2 * n_aug_ + 1; i++) {
+	 // x_ += weights_(i) * Xsig_pred_.col(i);
+  //}
+  x_ = Xsig_pred_ * weights_;
 
   cout << "Predict state mean and variance midpoint." << endl;
 
