@@ -69,3 +69,9 @@ My Kalman Filter update functions will be called based on different measurements
 Yes.  
 ## Code Style  
 Please (do your best to) stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
+## Video
+Video recording for success case.  
+Success case for running on Dataset 1.  
+![Successful running on dataset 1](./videos/CarND-Term2-P2-Database1-self_driving_car_nanodegree_program_6_23_2018_7_17_39_PM.gif)  
+Success case for running on Dataset 2.  
+![Successful running on dataset 2](./videos/CarND-Term2-P2-Database2-self_driving_car_nanodegree_program_6_23_2018_7_18_27_PM.gif)  
