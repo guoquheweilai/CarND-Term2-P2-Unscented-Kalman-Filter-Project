@@ -25,11 +25,11 @@ Here is the link to the [orginal repository](https://github.com/udacity/CarND-Un
 4. On the command line execute `./install-ubuntu.sh`  
 5. Build and run your code.  
 ## Project Description  
-(Need to change) * starter code in the `src` folder
-(Need to change) * a README file with instructions on compiling the code
-(Need to change) * a `Docs` folder, which contains details about the structure of the code templates
-(Need to change) * `CMakeLists.txt` file that will be used when compiling your code (you do not need to change this file)
-(Need to change) * a data file for testing your extended Kalman filter which the simulator interface provides
+- [main.cpp](./src/main.cpp):Reads in data, calls a function to run the Unscented Kalman filter, calls a function to calculate RMSE
+- [ukf.cpp](./src/ukf.cpp): Initializes the Unscented Kalman filter, calls the predict and update function, defines the predict and update functions
+- [tools.cpp](./src/tools.cpp): Function to calculate RMSE
+- [README.md](./README.md): Writeup for this project, including setup, running instructions and project rubric addressing.  
+- [CMakeLists.txt](./CMakeLists.txt): `CMakeLists.txt` file that will be used when compiling your code (you do not need to change this file)
 ## Run the project  
 * Clone this respository
 * At the top level of the project repository, create a build directory: `mkdir build && cd build`
@@ -56,14 +56,14 @@ Compiled successfully.
 Meet.
 ### 3. Follows the Correct Algorithm  
 #### 3.1 Your Sensor Fusion algorithm follows the general processing flow as taught in the preceding lessons.  
-(Need to change) My Kalman Filter implementation is completed at [`kalman_filter.cpp`](./src/kalman_filter.cpp)  
+My Kalman Filter implementation is completed at [`ukf.cpp`](./src/ukf.cpp)  
 #### 3.2 Your Kalman Filter algorithm handles the first measurements appropriately.  
-(Need to change) The first measurement is handled at [`FusionEKF.cpp` Line79-130](./src/FusionEKF.cpp#L79-L130)  
+The first measurement is handled at [`ukf.cpp` Line128-194](./src/ukf.cpp#L128-L194).  
 #### 3.3 Your Kalman Filter algorithm first predicts then updates.  
-(Need to change) My Kalman Filter predict function will be called at [`FusionEKF.cpp` Line132-166](./src/FusionEKF.cpp#L132-L166)  
-(Need to change) My Kalman Filter update function will be called after predict function at [`FusionEKF.cpp` Line135-192](./src/FusionEKF.cpp#L168-L192)  
+My Kalman Filter predict function will be called at [`ukf.cpp` Line195-207](./src/ukf.cpp#L195-L207)  
+My Kalman Filter update functions will be called based on different measurements after calling prediction function at [`ukf.cpp` Line209-223](./src/ukf.cpp#L209-L223).  
 #### 3.4 Your Kalman Filter can handle radar and lidar measurements.  
-(Need to change) My Kalman Filter update function will handle them at [`FusionEKF.cpp` Line135-192](./src/FusionEKF.cpp#L168-L192)  
+My Kalman Filter update functions will be called based on different measurements after calling prediction function. For laser measurement, the update function implementation can be found at [`ukf.cpp` Line401-555](./src/ukf.cpp#L401-L555). For radar measurement, the update function implementation can be found at [`ukf.cpp` Line557-710](./src/ukf.cpp#L557-L710).  
 ### 4. Code Efficiency  
 #### 4.1 Your algorithm should avoid unnecessary calculations.  
 Yes.  
