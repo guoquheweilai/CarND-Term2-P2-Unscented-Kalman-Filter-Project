@@ -1,4 +1,4 @@
-# CarND-Term2-P1-Extended-Kalman-Filter  
+# CarND-Term2-P2-Unscented-Kalman-Filter  
 ## Overview  
 In this project, you are going to implement the unscented Kalman filter in C++. You will be tracking the bicycle's position and velocity and predicting the positon of the object.  
 This project is based on the same structure as the [extended Kalman filter](https://github.com/ikcGitHub/CarND-Term2-P1-Extended-Kalman-Filter). It uses a main file that calls a function called ProcessMeasurement. Anything important happens in this function. The function is part of the class ukf.  
